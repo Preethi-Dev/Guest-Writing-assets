@@ -466,6 +466,8 @@ For laptop and desktop breakpoints, Redefine the layout and update the track lis
 }
 ```
 
+Using the negative `margin` hack, First image overlapped on heading.
+
 Dev tool visualization:
 
 ![For laptop and desktop breakpoint](/assets/Modern-Desktop-Breakpoint.jpg)

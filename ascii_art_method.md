@@ -5,7 +5,7 @@ Whenever we build simple or complex layouts using Grid. Mostly, We position the 
 ## Table of content
 
     - Describing ASCII-Art Layout
-    - Protcols for apply ASCII-Art Method
+    - Protocols for applying ASCII-Art Method
     - ASCII-Art Placement is better than  Line Based Placement
     - An Universal Use case
     - Line Names allocated implicitly
@@ -15,31 +15,31 @@ Whenever we build simple or complex layouts using Grid. Mostly, We position the 
 
 ## Describing ASCII-Art Layout
 
-When we declare an element as grid container using `dispaly: grid`. By default, Grid container landed with single column track and sufficient rows are generated. If child items participate in grid which converted to grid items irrespective of thier `display` property.
+When we declare an element as a grid container using `display: grid`. By default, the Grid container landed with a single column track and sufficient rows are generated. If child items participate in the grid which converted to grid items irrespective of their `display` property.
 
-For Instance, Create an explicit grid by defining columns and rows using `grid-template-column` and `grid-template-rows`. Here, We Create two columns share the free space equally and three rows with track size of 200px.
+For Instance, Create an explicit grid by defining columns and rows using `grid-template-column` and `grid-template-rows`. Here, We Create two columns that share the free space equally and three rows with a track size of 200px.
 
 ```css
 .grid {
-  dispaly: grid;
+  display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 200px 200px 200px;
 }
 ```
 
-Illustrate the defined explicit grid by devtools as below,
+Illustrate the defined explicit grid by dev tools as below,
 
 ![Rows and columns](/assets/Explicit-Grid.jpg)
 
-Currently, We have handed with two column tracks and three row tracks. So, Just Start to define our layout in ASCII-Art Style. We can define the entier layout within the grid container using named grid areas.
+Currently, We have handed with two column tracks and three row tracks. So, Just Start to define our layout in ASCII-Art Style. We can define the entire layout within the grid container using named grid areas.
 
-In the above explicit grid, We have two cells for each row and assigning name for each cell using `grid-template-areas` property. According to the spec, Initial value of `grid-template-areas` is `none`.
+In the above explicit grid, We have two cells for each row and assign a name for each cell using the `grid-template-areas` property. According to the spec, Initial value of `grid-template-areas` is `none`.
 
 ```css
 grid-template-areas = none | <string>+
 ```
 
-`<string>+` is listing the group of strings enclosed with quote. Each string represented as cell. Each quoted strings represented as row.
+`<string>+` is listing the group of strings enclosed with a quote. Each string is represented as a cell. Each quoted string is represented as a row.
 
 For Instance,
 
@@ -50,22 +50,22 @@ grid-template-areas:
   "foot foot";
 ```
 
-The value of `grid-template-areas` describing the layout having four grid areas. They are,
+The value of `grid-template-areas` describes the layout as having four grid areas. They are,
 
 - head
 - nav
 - main
 - foot
 
-`head` and `foot` span two column tracks and one row track. Remaining `nav` and `main` span one column track and one row track. The value of `grid-template-areas` seems ASCII-Art style and At the same time, We can get an visualisation of overall structure of the layout from the CSS itself which is the most trouble-free way to understand.
+`head` and `foot` span two column tracks and one row track. Remaining `nav` and `main` span one column track and one row track. The value of `grid-template-areas` seems ASCII-Art style and At the same time, We can get a visualization of the overall structure of the layout from the CSS itself which is the most trouble-free way to understand it.
 
-To understand how the value of `grid-template-areas` get plotted in grid, observe the below illustration.
+To understand how the value of `grid-template-areas` gets plotted in a grid, observe the below illustration.
 
 ![named template areas](/assets/value-of-grid-template-areas.gif)
 
 Using `grid-template-areas`, We created our layout having four grid areas(head, nav, main, foot).
 
-Now, Start to position the grid items against named grid areas instead of line numbers. Accordingly, Place an `header` element into the named grid area `head`, Specify the named grid area `head` in `header` element using `grid-area` property.
+Now, Start to position the grid items against named grid areas instead of line numbers. Accordingly, Place a `header` element into the named grid area `head`, Specify the named grid area `head` in the `header` element using `grid-area` property.
 
 > Named grid area in the grid layout also called as **ident**
 
@@ -75,7 +75,7 @@ header {
 }
 ```
 
-Likewise, Place the `nav`, `main` and `footer` in named grid areas `nav`, `main` and `foot` using `grid-area` property.
+Likewise, Place the `nav`, `main`, and `footer` in named grid areas `nav`, `main`, and `foot` using `grid-area` property.
 
 ```css
 nav {
@@ -89,9 +89,9 @@ footer {
 }
 ```
 
-## Protocols for apply ASCII-Art Method
+## Protocols for applying ASCII-Art Method
 
-According to the CSS Grid Layout Module Level 1, All strings must be defined under following tokens,
+According to the CSS Grid Layout Module Level 1, All strings must be defined under the following tokens,
 
 - Named cell token
 - Null cell token
@@ -107,15 +107,15 @@ Represent the unnamed grid area in the grid container. For instance, **empty cel
 
 ### Trash token
 
-A Syntax Error, An invalid decleration. For instance, Having disparate number of cells in rows makes the definition invalid.
+A Syntax Error, An invalid declaration. For instance, Having a disparate number of cells in rows makes the definition invalid.
 
 In `grid-template-area` definition,
 
-- Every quoted strings(rows) must be have same number of cells and Define the complete grid without ignore any cell.
+- Every quoted string (rows) must have the same number of cells and Define the complete grid without ignoring any cell.
 
 ![Do's and Dont's of ASCII-Art Definition](/assets/Do's-and-Dont's.jpg)
 
-- Need to ignore a cell or leave as **empty cell**, Use full stop character(`.`)
+- Need to ignore a cell or leave it as **empty cell**, Use full stop character(`.`)
   For instance from CSS Grid Layout Module Level 1,
   ```css
   #grid {
@@ -126,7 +126,7 @@ In `grid-template-area` definition,
       "foot .";
   }
   ```
-  If you feel need more organised as well as more ASCII-Art styled definition for empty cells, use needed full stop characters without space between them.
+  If you feel need more organized as well as more ASCII-Art styled definition for empty cells, use needed full stop characters without space between them.
   For instance from CSS Grid Layout Module Level 1,
   ```css
   #grid {
@@ -137,35 +137,35 @@ In `grid-template-area` definition,
       "foot ....";
   }
   ```
-- A named cell token can span multiple grid cells, But those cells must form rectangular shape. Currently, we can't create 'L' or 'T' shaped areas.
+- A named cell token can span multiple grid cells, But those cells must form a rectangular shape. Currently, we can't create 'L' or 'T' shaped areas.
 
 > According to the CSS Spec, Non-rectangular or disconnected regions may be permitted in a future version of this module.
 
-## ASCII-Art Placement is better than Line Based Placement
+## ASCII-Art Placement is better than Line-Based Placement
 
-In line based placement, Every grid items placed against line numbers. Accordingly, Some grid item's line numbers getting disparate for each breakpoint. Everytime, We can't look back on line numbers used. At the same time, it takes cognitive encumbrance to understand the code after some time.
+In line-based placement, Every grid item is placed against line numbers. Accordingly, Some grid item's line numbers get disparate for each breakpoint. Every time, We can't look back on line numbers used. At the same time, it takes cognitive encumbrance to understand the code after some time.
 
-In ASCII-Art placement, Redefine the layout for each brakpoint using `grid-template-areas` within the grid container and convinent to see how the layout will look like from the css.
+In ASCII-Art placement, Redefine the layout for each breakpoint using `grid-template-areas` within the grid container, and convenient to see how the layout will look from the CSS.
 
-Using devtools, we can enable to display the line numbers as well as grid areas. In firefox devtools, Go to `layout` panel. under `grid` tab, You can find the `grid display settings` and enable the `display line number` and `display area names`. This steps are similar to other dev tools also.
+Using dev tools, we can enable to display the line numbers as well as grid areas. In firefox dev tools, Go to the `layout` panel. under `grid` tab, You can find the `grid display settings` and enable the `display line number` and `display area names`. These steps are similar to other dev tools also.
 
 ![Enabling grid settings](/assets/Grid-Display-Settings.jpg)
 
-Compare to line based placement, ASCII-Art placement furnished the named grid areas as well as line number which require less effort to visualize and easily find the placement of elements.
+Compare to line-based placement, ASCII-Art placement furnished the named grid areas as well as line numbers which require less effort to visualize and easily find the placement of elements.
 
-In the below illustration, Require to position an `header` element on first row track and span two column tracks. From comparing the below two disparate placements, Finding the line numbers take more cognitive encumbrance than finding the Named grid areas.
+In the below illustration, Require to position a `header` element on the first row track and span two column tracks. From comparing the below two disparate placements, Finding the line numbers take more cognitive encumbrance than finding the Named grid areas.
 
-![Line based placement vs ASCII Art placement](/assets/line-based-vs-ASCII-Art.jpg)
+![Line-based placement vs ASCII Art placement](/assets/line-based-vs-ASCII-Art.jpg)
 
 ## An Universal Use case
 
-ASCII-Art is commonly named as named template areas. Whenever we try to explore the named template areas. There is an universal use case explained in every resources. This use case having the pattern of `header`, `footer`, `sidebars`, `main`.
+ASCII-Art is commonly named as named template areas. Whenever we try to explore the named template areas. There is a universal use case explained in every resource. This use case has the pattern of `header`, `footer`, `sidebars`, `main`.
 
 ![An Universal Use case](/assets/Universal-Usecase.png)
 
-Implement this use case in ASCII-Art style seems a straightforward way and more understandable. Assign the ident to each element using `grid-area` only once in Base styles and No need to repeat it in every breakpoints. Redefine the layout for each breakpoint using `grid-template-areas` and Sometimes, Require to update the track listing using `grid-template-columns` and `grid-template-rows`. This guidelines will be similar to all kind of layouts. Let's digging to build the layout from smaller breakpoints will be a well behaved approach. Commonly called as **Mobile-First approach**.
+Implementing this use case in ASCII-Art style seems straightforward way and more understandable. Assign the ident to each element using `grid-area` only once in Base styles and No need to repeat it at every breakpoint. Redefine the layout for each breakpoint using `grid-template-areas` and Sometimes, Require to update the track listing using `grid-template-columns` and `grid-template-rows`. These guidelines will be similar to all kinds of layouts. Let's dig to build the layout from smaller breakpoints will be a well-behaved approach. Commonly called as **Mobile-First approach**.
 
-For Mobile Breakpoint, Everything will be stacked. Before defining the layout, Assign an ident to each elements using `grid-area` property as base style.
+For Mobile Breakpoint, Everything will be stacked. Before defining the layout, Assign an ident to each element using `grid-area` property as the base style.
 
 ```css
 header {
@@ -207,7 +207,7 @@ The layout gets rendered as below,
 
 ![Mobile breakpoint](/assets/Mobile-breakpoint.jpg)
 
-By default, Every grid items will be **auto-sized** which seems little bit weird. So, we set the `min-height` of `100vh`. Every grid items getting an equal breathing room makes the fine layout.
+By default, Every grid item will be **auto-sized** which seems a little bit weird. So, we set the `min-height` of `100vh`. Every grid item getting an equal breathing room makes the fine layout.
 
 ```css
 .parent {
@@ -224,9 +224,9 @@ By default, Every grid items will be **auto-sized** which seems little bit weird
 
 ![Mobile breakpoint with min-height](/assets/Mobile-breakpoint-with-equal-space.jpg)
 
-For Tablet breakpoint, Main gets landed beside the sidebars. Left and right sidebars gets stacked. consequently, Require to update the track listing as two columns and four rows explicitly.
+For Tablet breakpoint, Main gets landed beside the sidebars. The Left and right sidebars get stacked. consequently, Require to update the track listing as two columns and four rows explicitly.
 
-Accordigly, we redefine the layout as below,
+Accordingly, we redefine the layout as below,
 
 ```css
 .parent {
@@ -242,7 +242,7 @@ Accordigly, we redefine the layout as below,
 
 ![Tablet breakpoint](/assets/Tablet-breakpoint.jpg)
 
-For Desktop breakpoint, A little tweaks in tablet breakpoint. sidebars gets disperated into individual columns. Accordingly, Update the track listing as three columns and redefine the layout as below,
+For Desktop breakpoint, A few tweaks in tablet breakpoint. sidebars get desperate into individual columns. Accordingly, Update the track listing as three columns and redefine the layout as below,
 
 ```css
 .parent {
@@ -263,19 +263,19 @@ Take a look at the below codepen, An universal use case implemented alike explai
 
 ## Line Names allocated implicitly
 
-According to CSS grid layout module level 1, `grid-template-areas` generate **implicity named grid lines** from named grid areas by default. Each named grid area having four implicity named grid line: `-start` append to name of the grid area for starting lines of each grid area and ending lines of each grid area have `-end` append to name of the grid area
+According to CSS grid layout module level 1, `grid-template-areas` generate **implicity named grid lines** from named grid areas by default. Each named grid area has four implicity named grid line: `-start` append to name of the grid area for starting lines of each grid area and ending lines of each grid area have `-end` append to name of the grid area
 
-Each implicitly named grid line behaves as same as any other named grid lines. They do not appeared in `grid-template-columns` and `grid-template-rows`. If we specifiy explicitly named grid lines, Then track line will have both explicitly and implicitly named grid lines. Both works same.
+Each implicitly named grid line behaves as same as any other named grid lines. They do not appear in `grid-template-columns` and `grid-template-rows`. If we specify explicitly named grid lines, Then the track line will have both explicitly and implicitly named grid lines. Both work the same.
 
 For instance,
 
-For named grid area `head`, Four implicitly named grid lines are created. Row-start and column-start lines named as `head-start`. Alike, Row-end and column-end lines named as `head-end`. Two `head-start` and two `head-end` are implicitly named grid lines of the named grid area `head`.
+For named grid area `head`, Four implicitly named grid lines are created. Row-start and column-start lines are named `head-start`. Alike, Row-end and column-end lines are named `head-end`. Two `head-start` and two `head-end` are implicitly named grid lines of the named grid area `head`.
 
 ![Implicitly assigned line names](/assets/Implicitly-assigned-line-names.jpg)
 
-In view of the fact that anyone of the cell can't share disparated named grid areas. Consequently, We can't achieve overlay technique in ASCII Art layout. Though this can be accomplished by implicitly assigned line names. We can place an grid item as overlay using implicitly assigned line names.
+In view of the fact that anyone of the cell can't share disparated named grid areas. Consequently, We can't achieve the overlay technique in ASCII Art layout. Though this can be accomplished by implicitly assigned line names. We can place a grid item as an overlay using implicitly assigned line names.
 
-Use the same `grid-area` property, For assigning the implicitly assigned line names to `overlay` element. Line based placement as well used the `grid-area` as shorthand property to place an grid items against line numbers. Order of `grid-area` property's value is opposite to box-sizing property's value such as margin, padding.
+Use the same `grid-area` property, For assigning the implicitly assigned line names to `overlay` element. Line-based placement as well used the `grid-area` as a shorthand property to place grid items against line numbers. Order of `grid-area` property's value is opposite to box-sizing property's value such as margin, padding.
 
 The order of `grid-area` property's value is
 
@@ -283,11 +283,11 @@ The order of `grid-area` property's value is
 grid-area: block-start / inline-start / block-end / inline-end;
 ```
 
-According to the Logical properties and value level 1, `block-start`, `block-end`, `inline-start`, `inline-end` are flow relative values relates to flow of content. Accordingly, They can change if the text direction or writing mode get changed. whereas, The term `block` indicates the content flow from top to bottom direction. For instance, Paragraphs are laid out one below other. The term `inline` indicates left to right direction. For instance, Words in a sentence laid out from left to right if it's LTR language.
+According to the Logical properties and value level 1, `block-start`, `block-end`, `inline-start`, and `inline-end` are flow relative values relates to the flow of content. Accordingly, They can change if the text direction or writing mode gets changed. whereas, The term `block` indicates the content flow from top to bottom direction. For instance, Paragraphs are laid out one below the other. The term `inline` indicates the left to right direction. For instance, Words in a sentence are laid out from left to right if it's LTR language.
 
 ![Block and inline flow](/assets/Block-and-inline-flow.jpg)
 
-In Simple words, Row axis referred to block axis. Column axis referred to inline axis.
+In Simple words, the Row axis referred to the block axis. The column axis referred to an inline axis.
 The block axis properties are `grid-row-start` (block-start) and `grid-row-end` (block-end). The inline axis properties are `grid-column-start` (inline-start) and `grid-column-end` (inline-end). Based on that, `grid-area` shorthand properties works.
 
 ```css
@@ -296,7 +296,7 @@ grid-area: grid-row-start / grid-column-start / grid-row-end / grid-column-end;
 
 ![Block and inline axis](/assets/Flow-relative-direction.jpg)
 
-This `grid-area` property will helpful to position the element against the line number or named grid lines or an ident (named grid area). For instance, Let's take the universal usecase having the pattern of `header`, `footer`, `sidebars`, `main`. Create an overlay which occupy `sidebars` and `main`. Using `grid-area` property, Position the overlay against implicitly assigned line names using below css,
+This `grid-area` property will be helpful to position the element against the line number or named grid lines or an ident (named grid area). For instance, Let's take the universal use case having the pattern of `header`, `footer`, `sidebars`, `main`. Create an overlay that occupies `sidebars` and `main`. Using `grid-area` property, Position the overlay against implicitly assigned line names using the below CSS,
 
 ```css
 .overlay {
@@ -304,7 +304,7 @@ This `grid-area` property will helpful to position the element against the line 
 }
 ```
 
-Take a look at the below codepen, An overlay implemented in universal use case alike explained above, and see how this overlay positioned across all breakpoints:
+Take a look at the below codepen, An overlay implemented in a universal use case like explained above, and see how this overlay is positioned across all breakpoints:
 
 {% codepen https://codepen.io/preethi-dev/pen/gOeBWWL %}
 
@@ -314,7 +314,7 @@ Occasionally, Require to implement the grid in part of the container. Alike a co
 
 ![Minimal Layout](/assets/Minimal-Layout.jpg)
 
-In `main`, Require to position the `.image` and `.text` div blocks by ASCII-Art style. For Mobile breakpoint, Define the track list as 4-column grid and layout will be `.image` and `.text` span four column tracks and one row track as follow:
+In `main`, Require to position the `.image` and `.text` div blocks by ASCII-Art style. For Mobile breakpoint, Define the track list as a 4-column grid and the layout will be `.image` and `.text` span four column tracks and one row track as follow:
 
 ```css
 main {
@@ -326,7 +326,7 @@ main {
 }
 ```
 
-Assign the idents to corresponding div blocks using below css:
+Assign the idents to corresponding div blocks using the below CSS:
 
 ```css
 main .image {
@@ -342,7 +342,7 @@ Using dev tools, We can clearly visualize the named grid areas like below,
 
 ![For mobile breakpoint](/assets/Minimal-Mobile-Breakpoint.jpg)
 
-For Small Tablet breakpoint, Redefine the layout using named cell token and null cell token for leaving a empty cell and require to redefine the track list as 6-column grid using below css:
+For Small Tablet breakpoint, Redefine the layout using named cell token and null cell token for leaving an empty cell and require to redefine the track list as a 6-column grid using the below CSS:
 
 ```css
 main {
@@ -357,7 +357,7 @@ Dev tool visualization:
 
 ![For Small Tablet breakpoint](/assets/Minimal-Small-Tablet-Breakpoint.jpg)
 
-For Large Tablet breakpoint, Redefine the layout and update the track listing as 8-column grid using below css:
+For Large Tablet breakpoint, Redefine the layout and update the track listing as an 8-column grid using the below CSS:
 
 ```css
 main {
@@ -372,7 +372,7 @@ Dev tool visualization:
 
 ![For large tablet breakpoint](/assets/Minimal-Large-Tablet-Breakpoint.jpg)
 
-Finally for larger breakpoints like laptop and desktop, Redefine the layout and update the track listing as 12-column grid using below css:
+Finally for larger breakpoints like laptop and desktop, Redefine the layout and update the track listing as a 12-column grid using the below CSS:
 
 ```css
 main {
@@ -387,19 +387,19 @@ Dev tool visualization:
 
 ![For Laptop and Desktop breakpoint](/assets/Minimal-Laptop-Desktop-Breakpoint.jpg)
 
-See the below code pen how the layout adapts to every breakpoints:
+See the below code pen how the layout adapts to every breakpoint:
 
 {% codepen https://codepen.io/preethi-dev/pen/rNdqBbX %}
 
 ## Accomplish the Modern Layout
 
-Previuosly, We look at an minimal and simple layouts using `grid-template-areas`. Now, Move onto modern layout a ittle bit tricker. But, We can accomplish it smartly by ASCII-Art style. Let's attain the below layout slowly but surely.
+Previously, We look at a minimal and simple layout using `grid-template-areas`. Now, Moving on to the modern layout which little bit tricker. But, We can accomplish it smartly by ASCII-Art style. Let's attain the below layout slowly but surely.
 
 ![Modern layout](/assets/Modern-Layout.jpg)
 
-Apart from the base styles, Start to digging into crucial part. Let's define the layout and assign the idents to corresponding elements. In this layout, Apply the grid on `main` alone and `header` accomplished by flexbox. In `main`, Required to position the three `.image` blocks and a single `.text` block against named grid areas.
+Apart from the base styles, Start digging into a crucial part. Let's define the layout and assign the idents to corresponding elements. In this layout, Apply the grid on `main` alone and `header` accomplished by flexbox. In `main`, Required to position the three `.image` blocks and a single `.text` block against named grid areas.
 
-For Mobile breakpoints, Define the layout and track listing using below CSS:
+For Mobile breakpoints, Define the layout and track listing using the below CSS:
 
 ```css
 .grid {
@@ -436,9 +436,9 @@ Dev tool visualization:
 
 ![For mobile breakpoint](/assets/Modern-Mobile-Breakpoint.jpg)
 
-Now, You can visualize the above defined layout effortlessly without any explaination. That's the spotlight of ASCII-Art layout.
+Now, You can visualize the above defined layout effortlessly without any explanation. That's the spotlight of ASCII-Art layout.
 
-For tablet breakpoints, Redefine the layout and track listing using below css,
+For tablet breakpoints, Redefine the layout and track listing using the below CSS,
 
 ```css
 .grid {
@@ -454,7 +454,7 @@ Dev tool visualization:
 
 ![For tablet breakpoint](/assets/Modern-Tablet-Breakpoint.jpg)
 
-For laptop and desktop breakpoints, Redefine the layout and update the track listing as 12-column grid using below css,
+For laptop and desktop breakpoints, Redefine the layout and update the track listing as a 12-column grid using the below CSS,
 
 ```css
 .grid {
@@ -470,7 +470,7 @@ Dev tool visualization:
 
 ![For laptop and desktop breakpoint](/assets/Modern-Desktop-Breakpoint.jpg)
 
-See the below code pen how the layout adapts to every breakpoints:
+See the below code pen how the layout adapts to every breakpoint:
 
 {% codepen https://codepen.io/preethi-dev/pen/gOeBYNo %}
 
@@ -480,10 +480,10 @@ See the below code pen how the layout adapts to every breakpoints:
 
 - While defining the layout, Use named cell tokens and null cell tokens.
 
-- As well as make sure with each row having same number of cells. Ignoring a single cell doesn't create a layout means considered as trash token.
+- As well as make sure with each row has the same number of cells. Ignoring a single cell doesn't create a layout means considered a trash token.
 
-- For better visual, Use required whitespace between the string while defining the layout. Make sure with no whitespace inside null cell token(eg: .....) Otherwise, A single whitespace found between null cell token, Then creates unnecessary empty cells which makes layout invalid.
+- For better visual, Use required whitespace between the string while defining the layout. Make sure with no whitespace inside the null cell token(eg: .....) Otherwise, A single whitespace found between null cell tokens Then creates unnecessary empty cells which make the layout invalid.
 
-- Require to reposition the grid items for each brakpoint then redefine the layout within the grid container and update the track listing if needed. No need to touch the grid items.
+- Require to reposition the grid items for each breakpoint then redefine the layout within the grid container and update the track listing if needed. No need to touch the grid items.
 
-- By default, Named grid areas having four implicitly assigned line name. Two for row tracks and another two for column tracks.
+- By default, Named grid areas have four implicitly assigned line names. Two for row tracks and another two for column tracks.
